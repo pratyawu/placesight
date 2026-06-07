@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLACESIGHT — Brand Handbook</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a09;
+  --white: #f5f4f0;
+  --warm: #e8e4db;
+  --accent: #c8b89a;
+  --dim: #6b6860;
+  --border: rgba(200,184,154,0.2);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: var(--sans); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,9,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
+.nav-logo { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--dim); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px 40px 60px; position: relative; border-bottom: 0.5px solid var(--border); }
+.hero-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 24px; }
+.hero-title { font-family: var(--serif); font-size: clamp(48px, 8vw, 96px); line-height: 1.0; color: var(--white); max-width: 800px; margin-bottom: 40px; }
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-statement { max-width: 560px; font-size: 14px; color: var(--dim); line-height: 1.7; border-left: 1px solid var(--accent); padding-left: 20px; margin-bottom: 60px; }
+.hero-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+.hero-meta-item { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; }
+.hero-meta-item span { display: block; color: var(--white); font-size: 13px; margin-top: 4px; }
+.hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; opacity: 0.4; }
+
+section { padding: 80px 40px; border-bottom: 0.5px solid var(--border); }
+.section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+.section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); max-width: 200px; }
+.section-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 48px); line-height: 1.15; color: var(--white); margin-bottom: 16px; }
+.section-sub { font-size: 13px; color: var(--dim); max-width: 500px; margin-bottom: 40px; line-height: 1.7; }
+
+.ps-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ps-table th { padding: 10px 16px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); border-bottom: 0.5px solid var(--border); text-align: left; background: rgba(200,184,154,0.04); }
+.ps-table td { padding: 14px 16px; border-bottom: 0.5px solid var(--border); color: rgba(245,244,240,0.75); vertical-align: top; line-height: 1.6; }
+.ps-table tr:last-child td { border-bottom: none; }
+.ps-table td:first-child { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); width: 160px; }
+.ps-table .group-row td { background: rgba(200,184,154,0.06); font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); padding: 8px 16px; }
+.table-wrap { border: 0.5px solid var(--border); border-radius: 4px; overflow: hidden; }
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-family: var(--mono); font-size: 10px; margin: 2px 2px 0 0; }
+.tag-pass { background: rgba(120,180,140,0.15); color: #78b48c; border: 0.5px solid rgba(120,180,140,0.3); }
+.tag-fail { background: rgba(180,100,80,0.15); color: #c87860; border: 0.5px solid rgba(180,100,80,0.3); }
+.tag-neutral { background: rgba(200,184,154,0.1); color: var(--accent); border: 0.5px solid var(--border); }
+
+.filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 40px; }
+.filter-card { background: var(--black); padding: 28px; }
+.filter-num { font-family: var(--serif); font-size: 36px; color: var(--border); margin-bottom: 12px; line-height: 1; }
+.filter-name { font-family: var(--serif); font-size: 20px; color: var(--white); margin-bottom: 6px; }
+.filter-q { font-size: 12px; color: var(--dim); font-style: italic; margin-bottom: 16px; line-height: 1.5; }
+.filter-copy { font-family: var(--mono); font-size: 11px; color: var(--accent); border-left: 1px solid var(--accent); padding-left: 12px; line-height: 1.5; margin-top: 12px; }
+
+.copy-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 4px; overflow: hidden; }
+.copy-row { display: grid; grid-template-columns: 100px 1fr 1fr; background: var(--black); }
+.copy-type { padding: 16px; background: rgba(200,184,154,0.04); font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); border-right: 0.5px solid var(--border); display: flex; align-items: center; }
+.copy-bad { padding: 16px; font-size: 12px; color: rgba(200,100,80,0.7); border-right: 0.5px solid var(--border); line-height: 1.5; }
+.copy-good { padding: 16px; font-size: 12px; color: rgba(120,180,140,0.9); line-height: 1.5; }
+.copy-head-row { display: grid; grid-template-columns: 100px 1fr 1fr; background: rgba(200,184,154,0.06); border-bottom: 0.5px solid var(--border); }
+.copy-head-cell { padding: 8px 16px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+.copy-head-cell:nth-child(2) { border-left: 0.5px solid var(--border); border-right: 0.5px solid var(--border); color: rgba(200,100,80,0.6); }
+.copy-head-cell:nth-child(3) { color: rgba(120,180,140,0.7); }
+
+.pattern-wrap { margin-bottom: 40px; }
+.week-row { display: grid; grid-template-columns: 80px repeat(7, 1fr); gap: 1px; margin-bottom: 1px; }
+.week-cell { padding: 12px 10px; font-size: 11px; line-height: 1.4; min-height: 70px; }
+.day-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); display: flex; align-items: center; padding: 0 10px; }
+.day-head { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); padding: 8px 10px; text-align: center; background: rgba(200,184,154,0.04); border-bottom: 0.5px solid var(--border); }
+.cell-single { background: rgba(120,180,140,0.08); border: 0.5px solid rgba(120,180,140,0.2); }
+.cell-antho { background: rgba(200,184,154,0.1); border: 0.5px solid rgba(200,184,154,0.3); }
+.cell-reel { background: rgba(100,140,200,0.08); border: 0.5px solid rgba(100,140,200,0.2); }
+.cell-rest { background: transparent; border: 0.5px solid var(--border); }
+.cell-type { font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+.cell-single .cell-type { color: rgba(120,180,140,0.8); }
+.cell-antho .cell-type { color: var(--accent); }
+.cell-reel .cell-type { color: rgba(100,140,200,0.8); }
+.cell-desc { font-size: 10px; color: rgba(245,244,240,0.5); }
+.cell-rest .cell-desc { color: var(--dim); font-size: 10px; display: flex; align-items: center; justify-content: center; height: 100%; opacity: 0.3; }
+
+.universe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 24px; }
+.universe-card { background: var(--black); padding: 24px; }
+.uni-pct { font-family: var(--serif); font-size: 40px; color: var(--border); line-height: 1; margin-bottom: 8px; }
+.uni-title { font-family: var(--serif); font-size: 18px; color: var(--white); margin-bottom: 4px; }
+.uni-sub { font-size: 11px; color: var(--dim); margin-bottom: 16px; line-height: 1.5; }
+.uni-list { list-style: none; }
+.uni-list li { font-size: 11px; color: rgba(245,244,240,0.5); padding: 4px 0; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.uni-list li::before { content: '—'; color: var(--accent); font-size: 10px; flex-shrink: 0; }
+.uni-list li:last-child { border-bottom: none; }
+
+.who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.who-card { padding: 28px; border: 0.5px solid var(--border); border-radius: 4px; }
+.who-card.is { border-color: rgba(120,180,140,0.3); }
+.who-card.not { border-color: rgba(180,100,80,0.2); }
+.who-title { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+.who-card.is .who-title { color: rgba(120,180,140,0.8); }
+.who-card.not .who-title { color: rgba(180,100,80,0.6); }
+.who-item { font-size: 12px; padding: 6px 0; border-bottom: 0.5px solid var(--border); display: flex; gap: 10px; align-items: flex-start; line-height: 1.4; }
+.who-item:last-child { border-bottom: none; }
+.who-card.is .who-item { color: rgba(245,244,240,0.7); }
+.who-card.not .who-item { color: rgba(245,244,240,0.4); }
+.who-dot { font-size: 10px; margin-top: 1px; flex-shrink: 0; }
+.who-card.is .who-dot { color: rgba(120,180,140,0.6); }
+.who-card.not .who-dot { color: rgba(180,100,80,0.4); }
+
+.statement { padding: 60px 40px; border-bottom: 0.5px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.statement-text { font-family: var(--serif); font-size: clamp(20px, 2.5vw, 28px); line-height: 1.4; color: var(--white); }
+.statement-text em { font-style: italic; color: var(--accent); }
+.statement-meta { font-size: 12px; color: var(--dim); line-height: 1.7; }
+.statement-meta strong { color: var(--white); font-weight: 400; display: block; margin-bottom: 6px; margin-top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+.statement-meta strong:first-child { margin-top: 0; }
+
+.tone-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 40px; }
+.tone-card { background: var(--black); padding: 24px 20px; }
+.tone-word { font-family: var(--serif); font-size: 18px; color: var(--white); margin-bottom: 8px; }
+.tone-desc { font-size: 11px; color: var(--dim); line-height: 1.5; }
+
+.legend { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.06em; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+.ig-note { background: rgba(200,184,154,0.05); border: 0.5px solid var(--border); border-radius: 4px; padding: 24px 28px; margin-top: 40px; }
+.ig-note-title { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.ig-note-body { font-size: 12px; color: var(--dim); line-height: 1.7; }
+.ig-note-body strong { color: var(--white); font-weight: 400; }
+
+footer { padding: 40px; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; }
+.footer-note { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.06em; }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; } .nav-links { display: none; }
+  section { padding: 60px 20px; } .hero { padding: 100px 20px 50px; }
+  .filter-grid { grid-template-columns: 1fr; } .universe-grid { grid-template-columns: 1fr; }
+  .tone-grid { grid-template-columns: 1fr 1fr; } .who-grid { grid-template-columns: 1fr; }
+  .statement { grid-template-columns: 1fr; gap: 40px; }
+  .week-row { grid-template-columns: 50px repeat(7, 1fr); } .week-cell { padding: 8px 6px; }
+  .copy-row { grid-template-columns: 80px 1fr; } .copy-bad { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Placesight — Brand Handbook</div>
+  <div class="nav-links">
+    <a href="#identity">Identity</a>
+    <a href="#filter">Filter</a>
+    <a href="#universe">Universe</a>
+    <a href="#tone">Tone</a>
+    <a href="#copy">Copy</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#audience">Audience</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-label">Brand Handbook — v1.0</div>
+  <h1 class="hero-title">Places<br>in <em>Plain</em>sight.</h1>
+  <p class="hero-statement">PLACESIGHT is a discovery platform and visual archive of curated spaces, contemporary culture, and lifestyle. Believing that stories and inspiration hide in plainsight, the platform exists for those who notice.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">Platform<span>Instagram · Web</span></div>
+    <div class="hero-meta-item">Region<span>Thailand → SEA</span></div>
+    <div class="hero-meta-item">Audience<span>20–40</span></div>
+    <div class="hero-meta-item">Language<span>EN overlay · TH/EN caption</span></div>
+  </div>
+</div>
+
+<section id="identity">
+  <div class="section-label">01 — Identity</div>
+  <h2 class="section-title">What Placesight is.</h2>
+  <p class="section-sub">Not a review account. Not a travel guide. A platform with a point of view.</p>
+  <div class="table-wrap">
+    <table class="ps-table">
+      <tr class="group-row"><td colspan="2">Core</td></tr>
+      <tr><td>Identity</td><td>Discovery platform and visual archive for place, culture, and lifestyle — curated for people 20–40 who want to experience things worth finding, before they're obvious.</td></tr>
+      <tr><td>Worldview</td><td>There are spaces and things made with intention everywhere. Most people walk past them. Placesight finds them first — then tells you why they matter.</td></tr>
+      <tr><td>Core question</td><td><em>"What's the story here — beyond the fact that it looks good?"</em></td></tr>
+      <tr><td>Feeling</td><td>"I found this before everyone else did." — accessible enough to share with anyone, but curated enough to feel proud doing it.</td></tr>
+      <tr class="group-row"><td colspan="2">Brand Statement</td></tr>
+      <tr><td>Full</td><td>PLACESIGHT is a discovery platform and visual archive of curated spaces, contemporary culture, and lifestyle. Believing that stories and inspiration hide in plainsight, the platform exists for those who notice.</td></tr>
+      <tr><td>Short</td><td>A discovery platform and visual archive. For those who notice.</td></tr>
+      <tr><td>Keywords</td><td><span class="tag tag-neutral">Place</span><span class="tag tag-neutral">Culture</span><span class="tag tag-neutral">Lifestyle</span><span class="tag tag-neutral">Discovery</span><span class="tag tag-neutral">Archive</span></td></tr>
+      <tr class="group-row"><td colspan="2">What Placesight is NOT</td></tr>
+      <tr><td>Not</td><td>A review account · A tourist guide · A cafe-hopping checklist · A cultural journal · An architecture magazine · A sponsored post feed</td></tr>
+      <tr><td>Reference</td><td>Sits between Hypebeast (confident, cultural authority) and Kinfolk (slow, human, specific) — with the accessibility of Korean travel IG done with more editorial filter.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="filter">
+  <div class="section-label">02 — The Filter</div>
+  <h2 class="section-title">5 questions before<br>every post.</h2>
+  <p class="section-sub">If a place can't answer at least 3 of these — it doesn't go up. No matter how beautiful it is.</p>
+  <div class="filter-grid">
+    <div class="filter-card">
+      <div class="filter-num">01</div>
+      <div class="filter-name">Contrast</div>
+      <div class="filter-q">"Why does this exist here — of all places?"</div>
+      <span class="tag tag-pass">unexpected location</span><span class="tag tag-pass">context mismatch</span><br><br>
+      <span class="tag tag-fail">pretty but predictable</span>
+      <div class="filter-copy">"Feels like Copenhagen. It's in Ratchathewi."</div>
+    </div>
+    <div class="filter-card">
+      <div class="filter-num">02</div>
+      <div class="filter-name">Intention</div>
+      <div class="filter-q">"Did someone make a deliberate decision to create this?"</div>
+      <span class="tag tag-pass">maker has a why</span><span class="tag tag-pass">nothing here is accidental</span><br><br>
+      <span class="tag tag-fail">trend-following · no reason behind it</span>
+      <div class="filter-copy">"The light comes from one direction. That was a choice."</div>
+    </div>
+    <div class="filter-card">
+      <div class="filter-num">03</div>
+      <div class="filter-name">Story</div>
+      <div class="filter-q">"What would you tell a friend about this place?"</div>
+      <span class="tag tag-pass">detail people don't know</span><span class="tag tag-pass">copy writes itself</span><br><br>
+      <span class="tag tag-fail">can only say "it's nice"</span>
+      <div class="filter-copy">"Open a year. Still no sign. That's intentional."</div>
+    </div>
+    <div class="filter-card">
+      <div class="filter-num">04</div>
+      <div class="filter-name">Feeling</div>
+      <div class="filter-q">"What will people feel here that they can't feel anywhere else?"</div>
+      <span class="tag tag-pass">specific emotion · stays with you</span><br><br>
+      <span class="tag tag-fail">good · nice · comfortable — interchangeable</span>
+      <div class="filter-copy">"People go in for 10 minutes and leave 2 hours later."</div>
+    </div>
+    <div class="filter-card" style="grid-column: span 2;">
+      <div class="filter-num">05</div>
+      <div class="filter-name">Timing</div>
+      <div class="filter-q">"Is Placesight early enough — or does it have a new angle on something already known?"</div>
+      <span class="tag tag-pass">not yet famous</span><span class="tag tag-pass">famous but this angle is new</span><span class="tag tag-pass">about to disappear</span><br><br>
+      <span class="tag tag-fail">everyone has posted it · nothing new to say</span>
+      <div class="filter-copy">"If Placesight posts it, it's not obvious yet. But it will be."</div>
+    </div>
+  </div>
+</section>
+
+<section id="universe">
+  <div class="section-label">03 — Content Universe</div>
+  <h2 class="section-title">Place · Culture · Lifestyle.</h2>
+  <p class="section-sub">Three pillars. One filter. Everything posted must pass the same 5 questions — regardless of category.</p>
+  <div class="universe-grid">
+    <div class="universe-card">
+      <div class="uni-pct">70%</div>
+      <div class="uni-title">Place</div>
+      <div class="uni-sub">Spaces that have something to say beyond looking good.</div>
+      <ul class="uni-list">
+        <li>Cafe — design-led, not trend-led</li>
+        <li>Hotel / Boutique stay</li>
+        <li>Architecture / Interior</li>
+        <li>Art space / Gallery</li>
+        <li>Independent bookshop</li>
+        <li>Community / Studio space</li>
+        <li>Destination / Neighbourhood</li>
+      </ul>
+    </div>
+    <div class="universe-card">
+      <div class="uni-pct">15%</div>
+      <div class="uni-title">Culture</div>
+      <div class="uni-sub">The people and scenes that make places what they are.</div>
+      <ul class="uni-list">
+        <li>Maker / Architect / Founder</li>
+        <li>The person behind the place</li>
+        <li>Scene that only happens here</li>
+        <li>Community space + what it enables</li>
+        <li>Visual archive / Detail shot</li>
+        <li>In transit / Journey</li>
+      </ul>
+    </div>
+    <div class="universe-card">
+      <div class="uni-pct">15%</div>
+      <div class="uni-title">Lifestyle</div>
+      <div class="uni-sub">Objects and things that tell you who someone is.</div>
+      <ul class="uni-list">
+        <li>Furniture / Material</li>
+        <li>Perfume / Scent</li>
+        <li>Ceramics / Craft object</li>
+        <li>Publication / Zine</li>
+        <li>Garment / Accessory</li>
+        <li>Everyday tool with design intent</li>
+      </ul>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="ps-table">
+      <thead><tr><th>Series</th><th>Format</th><th>Copy hook</th><th>Job</th><th>Freq</th></tr></thead>
+      <tbody>
+        <tr class="group-row"><td colspan="5">Discovery</td></tr>
+        <tr><td>Single Place</td><td>1 photo · feeling-first</td><td>Tension / Contrast / Insider</td><td>Archive + trust</td><td><span class="tag tag-neutral">3×/week</span></td></tr>
+        <tr><td>5 Places to ___</td><td>Carousel — emotion hook cover</td><td>"5 places for people who need to disappear"</td><td>Reach + shares</td><td><span class="tag tag-neutral">1×/week</span></td></tr>
+        <tr><td>Place to Place</td><td>Journey format</td><td>"3 hours for what — then you understand."</td><td>Humanise brand</td><td><span class="tag tag-neutral">2×/month</span></td></tr>
+        <tr><td>Without Google Maps</td><td>Single — hint, no pin</td><td>"If you find it, you'll know why."</td><td>Community + DMs</td><td><span class="tag tag-neutral">2×/month</span></td></tr>
+        <tr class="group-row"><td colspan="5">Culture</td></tr>
+        <tr><td>The Maker</td><td>Profile — person behind place</td><td>"The owner didn't want it to be famous. It happened anyway."</td><td>Depth + authority</td><td><span class="tag tag-neutral">2×/month</span></td></tr>
+        <tr><td>The Take</td><td>Pure graphic / opinion</td><td>Placesight's point of view — no place, just a statement</td><td>Brand voice</td><td><span class="tag tag-neutral">1×/month</span></td></tr>
+        <tr><td>Not For Everyone</td><td>Single — honest framing</td><td>"This place isn't for people who come to take photos."</td><td>Positioning</td><td><span class="tag tag-neutral">1×/month</span></td></tr>
+        <tr class="group-row"><td colspan="5">Archive</td></tr>
+        <tr><td>Visual Reel</td><td>No copy · pure visual · feeling only</td><td>No overlay — location only if needed</td><td>Feeling + reach</td><td><span class="tag tag-neutral">1×/week</span></td></tr>
+        <tr><td>The Detail</td><td>Texture / light / material close-up</td><td>No copy or location only</td><td>Taste signal</td><td><span class="tag tag-neutral">2×/month</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="tone">
+  <div class="section-label">04 — Brand Tone</div>
+  <h2 class="section-title">A friend with better taste.<br><em>Not a critic.</em></h2>
+  <p class="section-sub">Placesight sounds like someone who has been there, chose to tell you about it, and trusts you to make your own decision.</p>
+  <div class="tone-grid">
+    <div class="tone-card"><div class="tone-word">Confident</div><div class="tone-desc">Says something is worth finding without asking for agreement.</div></div>
+    <div class="tone-card"><div class="tone-word">Specific</div><div class="tone-desc">Never "nice atmosphere." Always why.</div></div>
+    <div class="tone-card"><div class="tone-word">Unhurried</div><div class="tone-desc">No urgency. No FOMO. No countdown.</div></div>
+    <div class="tone-card"><div class="tone-word">Dry</div><div class="tone-desc">Lets the place speak. Doesn't oversell it.</div></div>
+    <div class="tone-card"><div class="tone-word">Human</div><div class="tone-desc">Someone went there. Felt something. Chose to share it.</div></div>
+  </div>
+  <div class="table-wrap">
+    <table class="ps-table">
+      <thead><tr><th>Rule</th><th>Never</th><th>Always</th></tr></thead>
+      <tbody>
+        <tr><td>Opening</td><td>สวยมาก · น่ารักมาก · must visit</td><td>A fact or feeling that makes you stop</td></tr>
+        <tr><td>Food / drink</td><td>อร่อยมาก · คุ้มค่า · แนะนำเลย</td><td>Context that makes the food mean something</td></tr>
+        <tr><td>Location</td><td>Address in overlay · "ใจกลางเมือง"</td><td>Location in caption only — never the hook</td></tr>
+        <tr><td>Emoji</td><td>🥺✨💫🙌 in copy</td><td>None — or one, purposefully</td></tr>
+        <tr><td>CTA</td><td>รีบไปก่อนหมด · แท็กเพื่อน</td><td>No CTA — or a quiet invitation</td></tr>
+        <tr><td>Overlay language</td><td>Thai only</td><td>English — for regional reach and brand tone</td></tr>
+        <tr><td>Caption structure</td><td>Thai only · English only</td><td>EN paragraph first · TH paragraph second · Location · #PSbkk</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="copy">
+  <div class="section-label">05 — Copywriting</div>
+  <h2 class="section-title">From information<br>to <em>feeling.</em></h2>
+  <p class="section-sub">Copy position: Single place = left-align bottom. Anthology / series = center, bold. Visual Reel = no overlay.</p>
+  <div class="copy-grid">
+    <div class="copy-head-row">
+      <div class="copy-head-cell">Direction</div>
+      <div class="copy-head-cell">Avoid (information)</div>
+      <div class="copy-head-cell">Use (feeling)</div>
+    </div>
+    <div class="copy-row">
+      <div class="copy-type">Contrast</div>
+      <div class="copy-bad">Banal Thanca Cafe · Ratchathewi · Furniture Showroom</div>
+      <div class="copy-good">The furniture here is better than your apartment.</div>
+    </div>
+    <div class="copy-row">
+      <div class="copy-type">Tension</div>
+      <div class="copy-bad">Yellow Submarine · Khaoyai · Scenic hotel</div>
+      <div class="copy-good">The name tells you everything. Go see it anyway.</div>
+    </div>
+    <div class="copy-row">
+      <div class="copy-type">Insider</div>
+      <div class="copy-bad">Design-led cafe in Chiang Mai · Must visit</div>
+      <div class="copy-good">Design-led cafes in Chiang Mai nobody talks about.</div>
+    </div>
+    <div class="copy-row">
+      <div class="copy-type">Timing</div>
+      <div class="copy-bad">New cafe, Ayutthaya · Just opened</div>
+      <div class="copy-good">Go before it gets a waiting list.</div>
+    </div>
+    <div class="copy-row">
+      <div class="copy-type">Provocation</div>
+      <div class="copy-bad">Pasaya · Songwat · Lifestyle / Textile</div>
+      <div class="copy-good">Open 40 years. Most people still don't know it exists.</div>
+    </div>
+    <div class="copy-row">
+      <div class="copy-type">No copy</div>
+      <div class="copy-bad">Caption-heavy archive post</div>
+      <div class="copy-good">No overlay. Location only. The image is the copy.</div>
+    </div>
+  </div>
+</section>
+
+<section id="calendar">
+  <div class="section-label">06 — Content Calendar</div>
+  <h2 class="section-title">3 posts per week.<br>One clear rhythm.</h2>
+  <p class="section-sub">Tue · Thu · Sun — each with a different job. Every 3 weeks = one full 9-post cycle, ending with an Anthology on Sunday.</p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(120,180,140,0.5)"></div>Single Place</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(200,184,154,0.5)"></div>Anthology</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(100,140,200,0.5)"></div>Visual Reel</div>
+  </div>
+
+  <div class="pattern-wrap">
+    <div class="week-row">
+      <div></div>
+      <div class="day-head">Mon</div>
+      <div class="day-head">Tue</div>
+      <div class="day-head">Wed</div>
+      <div class="day-head">Thu</div>
+      <div class="day-head">Fri</div>
+      <div class="day-head">Sat</div>
+      <div class="day-head">Sun</div>
+    </div>
+    <div class="week-row">
+      <div class="day-label">Week 1</div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-single"><div class="cell-type">Single</div><div class="cell-desc">Place #1 · Tension copy · Left-align</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-reel"><div class="cell-type">Reel</div><div class="cell-desc">Visual only · No copy · Pure feeling</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-single"><div class="cell-type">Single</div><div class="cell-desc">Place #2 · Contrast copy · Left-align</div></div>
+    </div>
+    <div class="week-row">
+      <div class="day-label">Week 2</div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-single"><div class="cell-type">Single</div><div class="cell-desc">Place #3 · Insider copy · Left-align</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-reel"><div class="cell-type">Reel</div><div class="cell-desc">Visual only · Culture / Object break</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-single"><div class="cell-type">Single</div><div class="cell-desc">Place #4 · Provocation copy</div></div>
+    </div>
+    <div class="week-row">
+      <div class="day-label">Week 3</div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-single"><div class="cell-type">Single</div><div class="cell-desc">Place #5 · builds toward anthology theme</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-reel"><div class="cell-type">Reel</div><div class="cell-desc">Visual only · Sunset / Texture / Archive</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-rest"><div class="cell-desc">—</div></div>
+      <div class="week-cell cell-antho"><div class="cell-type">Anthology</div><div class="cell-desc">5 Places to ___ · Center copy · Bold hook</div></div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="ps-table">
+      <thead><tr><th>Slot</th><th>Type</th><th>Copy position</th><th>Primary job</th><th>Algorithm signal</th></tr></thead>
+      <tbody>
+        <tr><td>Tuesday ~7PM</td><td>Single place — photo</td><td>Left-align bottom</td><td>Archive + trust building</td><td>Saves</td></tr>
+        <tr><td>Thursday ~7PM</td><td>Visual Reel — no copy</td><td>No overlay</td><td>Reach + feeling</td><td>Watch time + shares</td></tr>
+        <tr><td>Sunday ~12PM</td><td>Single (wk 1–2) or Anthology (wk 3)</td><td>Left (single) · Center (anthology)</td><td>Community + reach spike</td><td>Shares + comments</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ig-note">
+    <div class="ig-note-title">IG Algorithm — what matters right now</div>
+    <div class="ig-note-body">
+      <strong>Under 10K followers:</strong> Reels get 1.5× more reach than static posts. One Reel minimum per week.<br><br>
+      <strong>Carousel posts</strong> drive the most saves. Saves tell the algorithm this content is worth pushing further — prioritise carousel for Anthology posts.<br><br>
+      <strong>First 3 seconds of every Reel</strong> determines amplification. Visual movement or strong opening frame — no logo animation, no slow fade-in. Drop viewers straight into the best moment.<br><br>
+      <strong>Posting time:</strong> Tue and Thu evenings 7–9 PM Bangkok. Sunday midday for Anthology reach posts.<br><br>
+      <strong>Tracking:</strong> Add UTM tags to link in bio from day one. Use Instagram Insights weekly to see which post type and which location drives the most saves and shares — that's the content to double down on.
+    </div>
+  </div>
+</section>
+
+<section id="audience">
+  <div class="section-label">07 — Audience</div>
+  <h2 class="section-title">Who Placesight<br>is <em>for.</em></h2>
+  <p class="section-sub">The content defines the audience. Not the other way around.</p>
+  <div class="who-grid">
+    <div class="who-card is">
+      <div class="who-title">Who follows Placesight</div>
+      <div class="who-item"><span class="who-dot">+</span>Age 20–40 · creative field or adjacent</div>
+      <div class="who-item"><span class="who-dot">+</span>Hypebeast · Monocle · Kinfolk already in their feed</div>
+      <div class="who-item"><span class="who-dot">+</span>Travels for experience, not checklist</div>
+      <div class="who-item"><span class="who-dot">+</span>Wants to know before everyone else does</div>
+      <div class="who-item"><span class="who-dot">+</span>Shares things because it says something about them</div>
+      <div class="who-item"><span class="who-dot">+</span>Bangkok-based, frequent visitor, or expat community</div>
+    </div>
+    <div class="who-card not">
+      <div class="who-title">Who Placesight is not for</div>
+      <div class="who-item"><span class="who-dot">—</span>Cafe hoppers who follow for checklists</div>
+      <div class="who-item"><span class="who-dot">—</span>F&B-first audience · food reviewers</div>
+      <div class="who-item"><span class="who-dot">—</span>People who need star ratings and "worth it?" answers</div>
+      <div class="who-item"><span class="who-dot">—</span>Tourists looking for a ready-made itinerary</div>
+      <div class="who-item"><span class="who-dot">—</span>Mass audience following trend accounts</div>
+    </div>
+  </div>
+</section>
+
+<div class="statement">
+  <div class="statement-text">
+    "The best places were always in plainsight.<br><em>We just show you where to look.</em>"
+  </div>
+  <div class="statement-meta">
+    <strong>Monetisation Path</strong>
+    Phase 1 (0–10K): Barter — access for content. Build the portfolio.<br>
+    Phase 2 (10–50K): Editorial partnership ฿8K–15K/post. Digital guides.<br>
+    Phase 3 (50K+): Members ฿149–199/mo · B2B studio · Trip curation.
+    <strong>Platform Roadmap</strong>
+    IG (discovery) → Notion database (link in bio) → Web platform → Members
+    <strong>Primary Platform</strong>
+    Instagram only. TikTok as cross-post bonus — not primary home.
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">PLACESIGHT — Brand Handbook v1.0</div>
+  <div class="footer-note">Internal use only · 2026</div>
+</footer>
+
+</body>
+</html>
